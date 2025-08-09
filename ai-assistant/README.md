@@ -101,6 +101,7 @@ If you have identified an LLM/s which you wish to use, and you wish to replace t
 While most common errors encountered simply involve checking if the containers required are up and will be specified directly by the application's error handling, one specific error will be covered here. Occasionally, especially if you are a first time user, you might encounter the issue where the frontend notifies you of a type mismatch, noting that user ID is a text value when it should not be, which prevents chat history (and hence the application) from displaying correctly. 
 Should this issue be encountered, one can perform the following steps - make sure your postgresql container is running in detached mode first.
     ```bash
+    
     docker ps #to find the container name of your postgresql container
     docker exec -it <container_name> bash #enter the container's terminal
     \d your_table_name #you should be able to see all the columns in your table, and their types, once you run this
@@ -108,11 +109,12 @@ Should this issue be encountered, one can perform the following steps - make sur
     ALTER COLUMN your_user_id_column_name TYPE INTEGER;
 
 Another common issue encountered is when you receive a notification that the model is not working, or you've installed a new model and want to test that everything is working. If so, run this command from within the flaskapp container. 
-    ```bash
-    curl http://host.docker.internal:11434/api/chat -d '{
+   ```bash
+ curl http://host.docker.internal:11434/api/chat -d '{
         "model": "llama3",
         "messages": [{"role": "user", "content": "Hello"}]
     }'
+
 
 
 
